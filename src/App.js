@@ -16,12 +16,14 @@ export default class App extends Component {
     this.setState({
       [event.target.name]: event.target.value
     }, () => this._getImc());
-
-    // this._getImc(this.state);
   };
 
   _getImc = () => {
-    if(this.state.altura == 0) return;
+    if(this.state.altura == 0 || this.state.peso == 0) {
+      this.setState({ imc: 0 });
+      return;
+    }
+
     const imc = Math.round(this.state.peso / (this.state.altura * this.state.altura));
     this.setState({ imc: imc });
   };
